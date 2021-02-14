@@ -7,7 +7,14 @@
 				"name": "Copy Population Data",
 				"description": "Copy from zip file to tsv file",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Check if File exists",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.00:05:00",
 					"retry": 0,
@@ -61,6 +68,21 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Check if File exists",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_population_raw_gz",
+						"type": "DatasetReference"
+					},
+					"timeout": "1.00:00:00",
+					"sleep": 600,
+					"minimumSize": 1024
+				}
 			}
 		],
 		"concurrency": 1,
