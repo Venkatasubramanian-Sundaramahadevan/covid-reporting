@@ -88,7 +88,8 @@
 							"userProperties": [],
 							"typeProperties": {
 								"url": "https://file_incompatible",
-								"method": "POST"
+								"method": "POST",
+								"body": "Dummy Message"
 							}
 						}
 					],
