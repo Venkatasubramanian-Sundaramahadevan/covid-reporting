@@ -18,8 +18,7 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"type": "HttpReadSettings"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
