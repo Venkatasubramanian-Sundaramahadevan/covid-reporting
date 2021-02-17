@@ -20,7 +20,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2021-02-16T20:58:00",
+				"startTime": "2021-02-16T21:00:00",
 				"endTime": "2021-02-17T21:00:00",
 				"timeZone": "Pacific Standard Time"
 			}
