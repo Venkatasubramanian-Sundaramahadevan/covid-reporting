@@ -371,7 +371,7 @@
 													"type": "Expression"
 												},
 												"baseURL": {
-													"value": "@item().output.sourceBaseURL",
+													"value": "@item().sourceBaseURL",
 													"type": "Expression"
 												}
 											}
