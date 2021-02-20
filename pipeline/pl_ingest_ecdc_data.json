@@ -46,7 +46,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Copy ECDC data').output.value",
+						"value": "@activity('Lookup ECDC File List').output.value",
 						"type": "Expression"
 					},
 					"activities": [
@@ -100,11 +100,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"relativeURL": {
-											"value": "@activity('Lookup ECDC File List').output.sourceRelativeURL",
+											"value": "@item().sourceRelativeURL",
 											"type": "Expression"
 										},
 										"baseURL": {
-											"value": "@activity('Lookup ECDC File List').output.sourceBaseURL",
+											"value": "@item().output.sourceBaseURL",
 											"type": "Expression"
 										}
 									}
@@ -116,7 +116,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"fileName": {
-											"value": "@activity('Lookup ECDC File List').output.sinkFileName",
+											"value": "@item().output.sinkFileName",
 											"type": "Expression"
 										}
 									}
