@@ -3,86 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy ECDC data",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Execute Copy Activity for each record from Config",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_ecdc_raw_csv_http",
-						"type": "DatasetReference",
-						"parameters": {
-							"relativeURL": {
-								"value": "@activity('Lookup ECDC File List').output.sourceRelativeURL",
-								"type": "Expression"
-							},
-							"baseURL": {
-								"value": "@activity('Lookup ECDC File List').output.sourceBaseURL",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_ecdc_raw_csv_dl",
-						"type": "DatasetReference",
-						"parameters": {
-							"fileName": {
-								"value": "@activity('Lookup ECDC File List').output.sinkFileName",
-								"type": "Expression"
-							}
-						}
-					}
-				]
-			},
-			{
 				"name": "Lookup ECDC File List",
 				"type": "Lookup",
 				"dependsOn": [],
@@ -128,7 +48,82 @@
 					"items": {
 						"value": "@activity('Lookup ECDC File List').output.value",
 						"type": "Expression"
-					}
+					},
+					"activities": [
+						{
+							"name": "Copy ECDC data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_ecdc_raw_csv_http",
+									"type": "DatasetReference",
+									"parameters": {
+										"relativeURL": {
+											"value": "@activity('Lookup ECDC File List').output.sourceRelativeURL",
+											"type": "Expression"
+										},
+										"baseURL": {
+											"value": "@activity('Lookup ECDC File List').output.sourceBaseURL",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_ecdc_raw_csv_dl",
+									"type": "DatasetReference",
+									"parameters": {
+										"fileName": {
+											"value": "@activity('Lookup ECDC File List').output.sinkFileName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
 				}
 			}
 		],
