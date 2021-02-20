@@ -103,6 +103,9 @@
 				"schema": {
 					"type": "object",
 					"properties": {
+						"sourceBaseURL": {
+							"type": "string"
+						},
 						"sourceRelativeURL": {
 							"type": "string"
 						},
@@ -292,7 +295,8 @@
 								"referenceName": "ds_ecdc_file_list",
 								"type": "DatasetReference",
 								"parameters": {}
-							}
+							},
+							"firstRowOnly": false
 						}
 					},
 					{
@@ -363,11 +367,11 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"relativeURL": {
-													"value": "@activity('Lookup ECDC File List').output.sourceRelativeURL",
+													"value": "@item().sourceRelativeURL",
 													"type": "Expression"
 												},
 												"baseURL": {
-													"value": "@activity('Lookup ECDC File List').output.sourceBaseURL",
+													"value": "@item().output.sourceBaseURL",
 													"type": "Expression"
 												}
 											}
@@ -379,7 +383,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"fileName": {
-													"value": "@activity('Lookup ECDC File List').output.sinkFileName",
+													"value": "@item().sinkFileName",
 													"type": "Expression"
 												}
 											}
